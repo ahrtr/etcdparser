@@ -2,6 +2,11 @@ etcdparser
 ======
 etcdparser is a tool to parse etcd's data, including snapshot files and WAL files. 
 
+# Build
+```
+$ go build -o ~/go/bin/ep main.go
+```
+
 # Usage
 ```
 Etcd parser is used to parse etcd's data, including WAL and snapshot
