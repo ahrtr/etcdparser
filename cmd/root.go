@@ -2,21 +2,21 @@ package cmd
 
 import (
 	"fmt"
-	"os"
 	"github.com/spf13/cobra"
+	"os"
 )
 
 var (
-	dataDir string
+	dataDir     string
 	showDetails bool
-	rawFormat bool
+	rawFormat   bool
 )
 
 func CreateRootCommand() *cobra.Command {
-	var rootCmd  = &cobra.Command {
+	var rootCmd = &cobra.Command{
 		Use:   "ep",
 		Short: "Etcd parser",
-		Long: "Etcd parser is used to parse etcd's data, including WAL and snapshot",
+		Long:  "Etcd parser is used to parse etcd's data, including WAL and snapshot",
 	}
 
 	rootCmd.PersistentFlags().StringVarP(&dataDir, "data-dir", "d", "", "Etcd data directory")

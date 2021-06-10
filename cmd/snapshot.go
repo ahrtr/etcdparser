@@ -4,15 +4,15 @@ import (
 	"errors"
 	"fmt"
 	"github.com/spf13/cobra"
-	"go.etcd.io/etcd/server/v3/wal"
 	"go.etcd.io/etcd/server/v3/datadir"
 	"go.etcd.io/etcd/server/v3/etcdserver"
 	"go.etcd.io/etcd/server/v3/etcdserver/api/snap"
 	"go.etcd.io/etcd/server/v3/etcdserver/api/v2store"
+	"go.etcd.io/etcd/server/v3/wal"
 )
 
 func parseSnapshot() func(cmd *cobra.Command, args []string) error {
-	return func(cmd *cobra.Command, args[] string) error {
+	return func(cmd *cobra.Command, args []string) error {
 		// check whether the data directory exist or not
 		if err := checkDataDir(); err != nil {
 			return err
@@ -76,12 +76,12 @@ func parseSnapshot() func(cmd *cobra.Command, args []string) error {
 	}
 }
 
-func createSnapCommand() *cobra.Command{
-	var snapCmd  = &cobra.Command {
+func createSnapCommand() *cobra.Command {
+	var snapCmd = &cobra.Command{
 		Use:   "snap",
 		Short: "Parse snap files",
-		Long: "Parse snap files",
-		RunE: silenceUsage(parseSnapshot()),
+		Long:  "Parse snap files",
+		RunE:  silenceUsage(parseSnapshot()),
 	}
 
 	return snapCmd

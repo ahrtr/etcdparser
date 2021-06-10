@@ -1,14 +1,14 @@
 package cmd
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 )
 
 func formatStructInJSON(val interface{}, rawFormat bool) (string, error) {
 	var (
 		formattedData []byte
-		err error
+		err           error
 	)
 
 	if rawFormat {
@@ -31,7 +31,7 @@ func printJsonObject(header, data string) {
 	}
 }
 
-func printSeparator(){
+func printSeparator() {
 	fmt.Println()
 	fmt.Println("-----------------------------------------------------")
 	fmt.Println()

@@ -5,23 +5,23 @@ import (
 	"github.com/spf13/cobra"
 	pb "go.etcd.io/etcd/api/v3/etcdserverpb"
 	"go.etcd.io/etcd/pkg/v3/pbutil"
-	"go.etcd.io/etcd/server/v3/wal"
-	"go.etcd.io/etcd/server/v3/wal/walpb"
+	"go.etcd.io/etcd/raft/v3/raftpb"
 	"go.etcd.io/etcd/server/v3/datadir"
 	"go.etcd.io/etcd/server/v3/etcdserver/api/snap"
-	"go.etcd.io/etcd/raft/v3/raftpb"
+	"go.etcd.io/etcd/server/v3/wal"
+	"go.etcd.io/etcd/server/v3/wal/walpb"
 	"io"
 )
 
 func parseWAL() func(cmd *cobra.Command, args []string) error {
-	return func(cmd *cobra.Command, args[] string) error {
+	return func(cmd *cobra.Command, args []string) error {
 		var (
-			walsnap walpb.Snapshot
-			w *wal.WAL
+			walsnap   walpb.Snapshot
+			w         *wal.WAL
 			wmetadata []byte
-			st raftpb.HardState
-			ents []raftpb.Entry
-			err error
+			st        raftpb.HardState
+			ents      []raftpb.Entry
+			err       error
 		)
 
 		// check whether the data directory exist or not
@@ -118,12 +118,12 @@ func parseWAL() func(cmd *cobra.Command, args []string) error {
 	}
 }
 
-func createWALCommand() *cobra.Command{
-	var walCmd  = &cobra.Command {
+func createWALCommand() *cobra.Command {
+	var walCmd = &cobra.Command{
 		Use:   "wal",
 		Short: "Parse wal files",
-		Long: "Parse wal files",
-		RunE: silenceUsage(parseWAL()),
+		Long:  "Parse wal files",
+		RunE:  silenceUsage(parseWAL()),
 	}
 
 	return walCmd
