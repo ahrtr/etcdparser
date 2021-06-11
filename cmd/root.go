@@ -13,6 +13,8 @@ var (
 	dataDir     string
 	showDetails bool
 	rawFormat   bool
+
+	Version = "development"
 )
 
 func CreateRootCommand() *cobra.Command {
@@ -20,6 +22,7 @@ func CreateRootCommand() *cobra.Command {
 		Use:   "ep",
 		Short: "Etcd parser",
 		Long:  "Etcd parser is used to parse etcd's data, including WAL and snapshot",
+		Version: Version,
 	}
 
 	rootCmd.PersistentFlags().StringVarP(&dataDir, "data-dir", "d", "", "Etcd data directory")
@@ -29,6 +32,8 @@ func CreateRootCommand() *cobra.Command {
 
 	rootCmd.AddCommand(createWALCommand())
 	rootCmd.AddCommand(createSnapCommand())
+
+	rootCmd.SetVersionTemplate("Etcd parser version: {{.Version}}\n")
 
 	return rootCmd
 }

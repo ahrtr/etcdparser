@@ -4,7 +4,7 @@ etcdparser is a tool to parse etcd's data, including snapshot files and WAL file
 
 # Build
 ```
-$ go build -o ~/go/bin/ep main.go
+$ go build -ldflags "-X github.com/ahrtr/etcdparser/cmd.Version=0.1.0" -o ~/go/bin/ep main.go
 ```
 
 # Usage
@@ -24,6 +24,7 @@ Flags:
   -h, --help              help for ep
   -r, --raw               Whether to print the data in raw format
   -s, --show-details      Whether to show the details: entries or snapshot data
+  -v, --version           version for ep
 
 Use "ep [command] --help" for more information about a command.
 ```
