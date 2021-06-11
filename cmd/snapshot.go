@@ -41,7 +41,7 @@ func parseSnapshot() func(cmd *cobra.Command, args []string) error {
 		}
 
 		if nil == snapshot {
-			// It should run into this branch
+			// It shouldn't run into this branch
 			return errors.New("failed to load the newest snapshot")
 		}
 
