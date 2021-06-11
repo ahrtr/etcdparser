@@ -28,7 +28,7 @@ Flags:
 Use "ep [command] --help" for more information about a command.
 ```
 # Examples
-Example 1: parse the newest snapshot info
+## Example 1: parse the newest snapshot info
 ```
 $ ep -d /tmp/etcd snap
 ```
@@ -48,7 +48,7 @@ Snapshot Metadata:
 }
 ```
 
-Example 2: show all the data of the newest snapshot
+## Example 2: show all the data of the newest snapshot
 ```
 $ ep -d /tmp/etcd snap -s
 ```
@@ -86,7 +86,7 @@ Snapshot Data:
 ```
 Click **[examples/snapshot.log](examples/snapshot.log)** to get a complete example.
 
-Example 3: parse WAL file after the newest snapshot
+## Example 3: parse WAL file after the newest snapshot
 ```
 $ ep -d /tmp/etcd wal
 ```
@@ -127,7 +127,7 @@ Entry:
 Entry number: 40574
 ```
 
-Example 4: show all the entries after the newest snapshot
+## Example 4: show all the entries after the newest snapshot
 ```
 $ ep -d /tmp/etcd wal -s
 ```
