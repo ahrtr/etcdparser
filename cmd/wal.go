@@ -107,13 +107,34 @@ func parseWAL() func(cmd *cobra.Command, args []string) error {
 
 		// 4. print entries
 		printJsonObject("Entry", fmt.Sprintf("Entry number: %d\n", len(ents)))
+
 		if showDetails {
-			for _, entry := range ents {
+			for i, entry := range ents {
 				if s, err := formatStructInJSON(entry, rawFormat); err != nil {
-					return fmt.Errorf("failed to marshal Enntry, rawFormat: %t, error: %v", rawFormat, err)
+					return fmt.Errorf("%d: failed to marshal entry, rawFormat: %t, error: %v", i, rawFormat, err)
 				} else {
-					printJsonObject("", s)
+					printJsonObject(fmt.Sprintf("%d: raftpb.Entry", i), s)
 				}
+
+				var raftReq pb.InternalRaftRequest
+				if !pbutil.MaybeUnmarshal(&raftReq, entry.Data) { // backward compatible
+					var r pb.Request
+					rp := &r
+					pbutil.MustUnmarshal(rp, entry.Data)
+
+					if s, err := formatStructInJSON(r, rawFormat); err != nil {
+						return fmt.Errorf("%d: failed to marshal pb.Request, rawFormat: %t, error: %v", i, rawFormat, err)
+					} else {
+						printJsonObject(fmt.Sprintf("%d: pb.Request", i), s)
+					}
+				} else {
+					if s, err := formatStructInJSON(raftReq, rawFormat); err != nil {
+						return fmt.Errorf("%d: failed to marshal pb.InternalRaftRequest, rawFormat: %t, error: %v", i, rawFormat, err)
+					} else {
+						printJsonObject(fmt.Sprintf("%d: pb.InternalRaftRequest", i), s)
+					}
+				}
+				fmt.Println()
 			}
 		}
 
