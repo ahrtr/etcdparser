@@ -175,7 +175,7 @@ Entry number: 40574
     "Type": 0,
     "Data": "CJCW+p6crZ7Z2gESBFNZTkMaACIAKAAyADgASABQAFgAYABoAHAAeM7x07viz8K/FoABAA=="
 }
-0: pb.Request:
+0: raftpb.Entry.Data:
 {
     "ID": 15758791541287455504,
     "Method": "SYNC",
@@ -201,7 +201,7 @@ Entry number: 40574
     "Type": 0,
     "Data": "SgoIopX6npytntlaogYTCJGW+p6crZ7Z2gESBHJvb3QYBA=="
 }
-1: pb.InternalRaftRequest:
+1: raftpb.Entry.Data:
 {
     "header": {
         "ID": 15758791541287455505,
@@ -212,6 +212,7 @@ Entry number: 40574
         "ID": 6535419504432679586
     }
 }
+
 
 ......
 ```

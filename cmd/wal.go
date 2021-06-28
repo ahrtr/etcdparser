@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	pb "go.etcd.io/etcd/api/v3/etcdserverpb"
+	pe "github.com/ahrtr/etcdparser/pkg/entry"
 	"go.etcd.io/etcd/pkg/v3/pbutil"
 	"go.etcd.io/etcd/raft/v3/raftpb"
 	"go.etcd.io/etcd/server/v3/datadir"
@@ -116,24 +117,14 @@ func parseWAL() func(cmd *cobra.Command, args []string) error {
 					printJsonObject(fmt.Sprintf("%d: raftpb.Entry", i), s)
 				}
 
-				var raftReq pb.InternalRaftRequest
-				if !pbutil.MaybeUnmarshal(&raftReq, entry.Data) { // backward compatible
-					var r pb.Request
-					rp := &r
-					pbutil.MustUnmarshal(rp, entry.Data)
+				v := pe.Unmarshal(entry.Data)
 
-					if s, err := formatStructInJSON(r, rawFormat); err != nil {
-						return fmt.Errorf("%d: failed to marshal pb.Request, rawFormat: %t, error: %v", i, rawFormat, err)
-					} else {
-						printJsonObject(fmt.Sprintf("%d: pb.Request", i), s)
-					}
+				if s, err := formatStructInJSON(v, rawFormat); err != nil {
+					return fmt.Errorf("%d: failed to marshal entry data, rawFormat: %t, error: %v, value: %v", i, rawFormat, err, v)
 				} else {
-					if s, err := formatStructInJSON(raftReq, rawFormat); err != nil {
-						return fmt.Errorf("%d: failed to marshal pb.InternalRaftRequest, rawFormat: %t, error: %v", i, rawFormat, err)
-					} else {
-						printJsonObject(fmt.Sprintf("%d: pb.InternalRaftRequest", i), s)
-					}
+					printJsonObject(fmt.Sprintf("%d: raftpb.Entry.Data", i), s)
 				}
+
 				fmt.Println()
 			}
 		}
