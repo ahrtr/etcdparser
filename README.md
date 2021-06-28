@@ -168,18 +168,51 @@ HardState:
 Entry:
 Entry number: 40574
 
+0: raftpb.Entry:
 {
     "Term": 2,
     "Index": 200003,
     "Type": 0,
     "Data": "CJCW+p6crZ7Z2gESBFNZTkMaACIAKAAyADgASABQAFgAYABoAHAAeM7x07viz8K/FoABAA=="
 }
+0: pb.Request:
+{
+    "ID": 15758791541287455504,
+    "Method": "SYNC",
+    "Path": "",
+    "Val": "",
+    "Dir": false,
+    "PrevValue": "",
+    "PrevIndex": 0,
+    "Expiration": 0,
+    "Wait": false,
+    "Since": 0,
+    "Recursive": false,
+    "Sorted": false,
+    "Quorum": false,
+    "Time": 1621025927820802254,
+    "Stream": false
+}
+
+1: raftpb.Entry:
 {
     "Term": 2,
     "Index": 200004,
     "Type": 0,
     "Data": "SgoIopX6npytntlaogYTCJGW+p6crZ7Z2gESBHJvb3QYBA=="
 }
+1: pb.InternalRaftRequest:
+{
+    "header": {
+        "ID": 15758791541287455505,
+        "username": "root",
+        "auth_revision": 4
+    },
+    "lease_revoke": {
+        "ID": 6535419504432679586
+    }
+}
+
 ......
 ```
 Click **[examples/wal.log](examples/wal.log)** to get a complete example.
